@@ -1,6 +1,7 @@
 package com.hpg.service.payments.event.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hpg.service.payments.models.AccountUserModel;
 import com.hpg.service.payments.models.PixPaymentModels;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -24,4 +25,5 @@ public class PixPaymentEvents {
             e.printStackTrace();
         }
     }
+
 }

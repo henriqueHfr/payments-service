@@ -1,19 +1,41 @@
 package com.hpg.service.payments.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "account_user")
 public class AccountUserModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
+    @Column(nullable = false)
     private String userName;
+
+    @Column(nullable = false, unique = true)
     private String userEmail;
+
+    @Column(nullable = false, unique = true)
+    private String userCpf;
+
+    @Column(nullable = false, unique = true)
     private String userPhone;
+
     private String userAddress;
     private String userCity;
     private String userState;
     private String userCountry;
     private String userPostalCode;
+
+    @Column(nullable = false, unique = true)
     private String userPixKey;
+
     private String userPixKeyType;
-    private Double uerValueBalance;
+
+    @Column(nullable = false)
+    private Double userValueBalance;
+
     private String userLastTransactionId;
     private String userLastTransactionDate;
     private String userLastTransactionAmount;
@@ -42,12 +64,12 @@ public class AccountUserModel {
         this.userEmail = userEmail;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public String getUserCpf() {
+        return userCpf;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setUserCpf(String userCpf) {
+        this.userCpf = userCpf;
     }
 
     public String getUserPhone() {
@@ -56,6 +78,14 @@ public class AccountUserModel {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public String getUserCity() {
@@ -74,20 +104,20 @@ public class AccountUserModel {
         this.userState = userState;
     }
 
-    public String getUserPostalCode() {
-        return userPostalCode;
-    }
-
-    public void setUserPostalCode(String userPostalCode) {
-        this.userPostalCode = userPostalCode;
-    }
-
     public String getUserCountry() {
         return userCountry;
     }
 
     public void setUserCountry(String userCountry) {
         this.userCountry = userCountry;
+    }
+
+    public String getUserPostalCode() {
+        return userPostalCode;
+    }
+
+    public void setUserPostalCode(String userPostalCode) {
+        this.userPostalCode = userPostalCode;
     }
 
     public String getUserPixKey() {
@@ -106,12 +136,12 @@ public class AccountUserModel {
         this.userPixKeyType = userPixKeyType;
     }
 
-    public Double getUerValueBalance() {
-        return uerValueBalance;
+    public Double getUserValueBalance() {
+        return userValueBalance;
     }
 
-    public void setUerValueBalance(Double uerValueBalance) {
-        this.uerValueBalance = uerValueBalance;
+    public void setUserValueBalance(Double userValueBalance) {
+        this.userValueBalance = userValueBalance;
     }
 
     public String getUserLastTransactionId() {
