@@ -1,5 +1,6 @@
 package com.hpg.service.payments.config;
 
+import com.hpg.service.payments.exception.KafkaGlobalErrorHandler;
 import com.hpg.service.payments.models.PixPaymentModels;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -45,6 +46,7 @@ public class KafkaConfig {
     public ConcurrentKafkaListenerContainerFactory<String, PixPaymentModels> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, PixPaymentModels> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        factory.setCommonErrorHandler(new KafkaGlobalErrorHandler());
         return factory;
     }
 }

@@ -1,10 +1,7 @@
 package com.hpg.service.payments.controller;
 
 import com.hpg.service.payments.event.events.CreateUserEvents;
-import com.hpg.service.payments.event.events.PixPaymentEvents;
 import com.hpg.service.payments.models.AccountUserModel;
-import com.hpg.service.payments.repository.AccountUserRepository;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
