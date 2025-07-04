@@ -9,15 +9,15 @@ public class PixPaymentModels {
     private String pixKey;
     private String pixKeyType;
     private String transactionId;
-    private String amount;
+    private Double amount;
     private String comments;
-    private Number userSendingId;
+    private Long userSendingId;
 
-    public Number getUserSendingId() {
+    public Long getUserSendingId() {
         return userSendingId;
     }
 
-    public void setUserSendingId(Number userSendingId) {
+    public void setUserSendingId(Long userSendingId) {
         this.userSendingId = userSendingId;
     }
 
@@ -45,11 +45,11 @@ public class PixPaymentModels {
         this.transactionId = transactionId;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

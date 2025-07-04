@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PixPaymentEvents {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, PixPaymentModels> kafkaTemplate;
 
-    public PixPaymentEvents(KafkaTemplate<String, String> kafkaTemplate) {
+    public PixPaymentEvents(KafkaTemplate<String, PixPaymentModels> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -20,7 +20,7 @@ public class PixPaymentEvents {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(pixPaymentModels);
             System.out.println("Enviando pagamento PIX em JSON: " + json);
-            kafkaTemplate.send("pix-payment-topic", json);
+            kafkaTemplate.send("pix-payment-topic", pixPaymentModels);
         } catch (Exception e) {
             e.printStackTrace();
         }

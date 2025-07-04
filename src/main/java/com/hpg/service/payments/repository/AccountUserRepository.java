@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @EnableJpaRepositories
 public interface AccountUserRepository extends JpaRepository<AccountUserModel, Long> {
@@ -13,7 +15,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUserModel, L
 
     AccountUserModel findByUserPhone(String userPhone);
 
-    AccountUserModel findByUserPixKey(String userPixKey);
+    Optional<AccountUserModel> findByUserPixKey(String userPixKey);
 
     AccountUserModel findByUserPixKeyType(String userPixKeyType);
 
