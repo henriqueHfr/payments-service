@@ -92,6 +92,75 @@ Você pode rodar pela sua IDE (IntelliJ, VS Code, etc.) ou via terminal com Mave
 
 ---
 
+## 📫 Exemplos de Requisições (Payloads)
+
+### ✅ Criar Usuário
+
+`POST http://localhost:8080/auth/create/user`
+
+#### 🔹 Payload - Usuário João Silva
+
+```json
+{
+  "userName": "João Silva",
+  "userEmail": "joao.silva1@example.com",
+  "userCpf": "01230123011",
+  "userPhone": "+5511999999991",
+  "userAddress": "Rua das Flores, 123",
+  "userCity": "São Paulo",
+  "userState": "SP",
+  "userCountry": "Brasil",
+  "userPostalCode": "01000-000",
+  "userPixKey": "01230123011",
+  "userPixKeyType": "CPF",
+  "userValueBalance": 1500.75,
+  "userLastTransactionId": "TX123456789",
+  "userLastTransactionDate": "2023-10-01T15:30:00",
+  "userLastTransactionAmount": "250.00"
+}
+```
+
+#### 🔹 Payload - Usuário Henrique Teste
+
+```json
+{
+  "userName": "Henrique Teste",
+  "userEmail": "teste@teste.com",
+  "userCpf": "12312312311",
+  "userPhone": "+5511999999992",
+  "userAddress": "Rua das Flores, 123",
+  "userCity": "São Paulo",
+  "userState": "SP",
+  "userCountry": "Brasil",
+  "userPostalCode": "01000-000",
+  "userPixKey": "12312312311",
+  "userPixKeyType": "CPF",
+  "userValueBalance": 1500.00,
+  "userLastTransactionId": "TX123456789",
+  "userLastTransactionDate": "2023-10-01T15:30:00",
+  "userLastTransactionAmount": "250.00"
+}
+```
+
+---
+
+### ✅ Enviar Pagamento PIX
+
+`POST http://localhost:8080/payments/pix/send`
+
+```json
+{
+  "pixKey": "12312312311",
+  "pixKeyType": "CPF",
+  "transactionId": "",
+  "amount": 350.00,
+  "comments": "oi amigo, tudo bem?",
+  "userSendingId": 1
+}
+```
+
+---
+
 ## 🤝 Como Contribuir
 
 1. Faça um fork do projeto
