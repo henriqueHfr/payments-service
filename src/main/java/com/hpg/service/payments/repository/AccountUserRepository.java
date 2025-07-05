@@ -11,6 +11,8 @@ import java.util.Optional;
 @EnableJpaRepositories
 public interface AccountUserRepository extends JpaRepository<AccountUserModel, Long> {
 
+    Optional<AccountUserModel> findByUserId(Long userId);
+
     AccountUserModel findByUserEmail(String userEmail);
 
     AccountUserModel findByUserPhone(String userPhone);

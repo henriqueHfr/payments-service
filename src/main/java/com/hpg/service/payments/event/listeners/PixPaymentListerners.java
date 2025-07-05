@@ -11,30 +11,38 @@ import org.springframework.stereotype.Component;
 @Component
 public class PixPaymentListerners {
 
-    private ValidateAccountsService validateAccountsService;
+    private final ValidateAccountsService validateAccountsService;
+    private final ValidateBalanceBetweenAcccountService validateBalanceBetweenAcccountService;
+    private final SendPixService sendPixService;
 
-    private ValidateBalanceBetweenAcccountService ValidateBalanceBetweenAcccountService;
-
-    private SendPixService sendPixService;
+    public PixPaymentListerners(
+            ValidateAccountsService validateAccountsService,
+            ValidateBalanceBetweenAcccountService validateBalanceBetweenAcccountService,
+            SendPixService sendPixService
+    ) {
+        this.validateAccountsService = validateAccountsService;
+        this.validateBalanceBetweenAcccountService = validateBalanceBetweenAcccountService;
+        this.sendPixService = sendPixService;
+    }
 
     @KafkaListener(topics = "pix-payment-topic", groupId = "pagamento-group", containerFactory = "kafkaListenerContainerFactory")
     public ResponseEntity<String> consumer(PixPaymentModels pixPaymentModels) {
         System.out.println("Recebido pagamento confirmado para usuário: " + pixPaymentModels);
-        Boolean existsAccount = validateAccountsService.validateAccount(pixPaymentModels);
 
+        boolean existsAccount = validateAccountsService.validateAccount(pixPaymentModels);
         if (!existsAccount) {
             return ResponseEntity.badRequest().body("Contas de recebimento ou de envio inválida ou não encontrada.");
         }
 
-        Boolean validateBalance = ValidateBalanceBetweenAcccountService.validateBalance(pixPaymentModels.getUserSendingId(), pixPaymentModels.getAmount());
-
+        boolean validateBalance = validateBalanceBetweenAcccountService.validateBalance(
+                pixPaymentModels.getUserSendingId(), pixPaymentModels.getAmount());
         if (!validateBalance) {
             return ResponseEntity.badRequest().body("Saldo insuficiente na conta de envio.");
         }
 
-        sendPixService.sendPix(pixPaymentModels);
+        System.out.print("Processando pagamento PIX para: " + pixPaymentModels.getPixKey());
 
+        sendPixService.sendPix(pixPaymentModels);
         return ResponseEntity.ok("Pagamento PIX processado com sucesso.");
     }
 }
-

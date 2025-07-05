@@ -2,6 +2,8 @@ package com.hpg.service.payments.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "account_user")
 public class AccountUserModel {
@@ -37,8 +39,8 @@ public class AccountUserModel {
     private Double userValueBalance;
 
     private String userLastTransactionId;
-    private String userLastTransactionDate;
-    private String userLastTransactionAmount;
+    private Date userLastTransactionDate;
+    private Double userLastTransactionAmount;
 
     public Long getUserId() {
         return userId;
@@ -152,19 +154,19 @@ public class AccountUserModel {
         this.userLastTransactionId = userLastTransactionId;
     }
 
-    public String getUserLastTransactionDate() {
+    public Date getUserLastTransactionDate() {
         return userLastTransactionDate;
     }
 
-    public void setUserLastTransactionDate(String userLastTransactionDate) {
+    public void setUserLastTransactionDate(Date userLastTransactionDate) {
         this.userLastTransactionDate = userLastTransactionDate;
     }
 
-    public String getUserLastTransactionAmount() {
+    public Double getUserLastTransactionAmount() {
         return userLastTransactionAmount;
     }
 
-    public void setUserLastTransactionAmount(String userLastTransactionAmount) {
+    public void setUserLastTransactionAmount(Double userLastTransactionAmount) {
         this.userLastTransactionAmount = userLastTransactionAmount;
     }
 }
