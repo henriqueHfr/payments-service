@@ -28,7 +28,6 @@ public class SendPixService {
 
     @Transactional(rollbackFor = Exception.class)
     public void sendPix(PixPaymentModels pixPaymentModels) {
-        System.out.print("Entrei no sendPix");
         AccountUserModel userSending = accountUserRepository.findById(pixPaymentModels.getUserSendingId())
                 .orElseThrow(() -> new RuntimeException("Conta de envio não encontrada"));
 
@@ -38,10 +37,9 @@ public class SendPixService {
         double amount = pixPaymentModels.getAmount();
 
         String TransactionId = UUID.randomUUID().toString();
-
-        TransactionModels transaction = createDTOTransaction.createTransactionDTO(userSending, userReceive, pixPaymentModels, TransactionId);
-
         Date data = new Date();
+
+        TransactionModels transaction = createDTOTransaction.createTransactionDTO(userSending, userReceive, pixPaymentModels, TransactionId, data);
 
         try {
             saveTransactionDBService.saveTransaction(transaction);

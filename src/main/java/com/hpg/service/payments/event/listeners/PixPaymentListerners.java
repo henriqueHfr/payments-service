@@ -26,20 +26,7 @@ public class PixPaymentListerners {
     }
 
     @KafkaListener(topics = "pix-payment-topic", groupId = "pagamento-group", containerFactory = "kafkaListenerContainerFactory")
-    public ResponseEntity<String> consumer(PixPaymentModels pixPaymentModels) {
-
-        boolean existsAccount = validateAccountsService.validateAccount(pixPaymentModels);
-        if (!existsAccount) {
-            return ResponseEntity.badRequest().body("Contas de recebimento ou de envio inválida ou não encontrada.");
-        }
-
-        boolean validateBalance = validateBalanceBetweenAcccountService.validateBalance(
-                pixPaymentModels.getUserSendingId(), pixPaymentModels.getAmount());
-        if (!validateBalance) {
-            return ResponseEntity.badRequest().body("Saldo insuficiente na conta de envio.");
-        }
-
+    public void consumer(PixPaymentModels pixPaymentModels) {
         sendPixService.sendPix(pixPaymentModels);
-        return ResponseEntity.ok("Pagamento PIX processado com sucesso.");
     }
 }

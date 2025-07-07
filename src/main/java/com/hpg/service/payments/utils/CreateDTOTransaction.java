@@ -11,9 +11,7 @@ import java.util.UUID;
 @Component
 public class CreateDTOTransaction {
 
-    public TransactionModels createTransactionDTO(AccountUserModel userSending, AccountUserModel userReceive, PixPaymentModels pixPaymentModels, String transactionId) {
-
-        Date transactionDate = new Date();
+    public TransactionModels createTransactionDTO(AccountUserModel userSending, AccountUserModel userReceive, PixPaymentModels pixPaymentModels, String transactionId, Date transactionDate) {
 
         TransactionModels transaction = new TransactionModels();
         transaction.setUserSendingId(userSending.getUserId());
