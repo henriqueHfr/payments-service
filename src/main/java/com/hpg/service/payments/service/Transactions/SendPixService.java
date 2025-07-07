@@ -35,22 +35,16 @@ public class SendPixService {
         AccountUserModel userReceive = accountUserRepository.findByUserPixKey(pixPaymentModels.getPixKey())
                 .orElseThrow(() -> new RuntimeException("Conta de recebimento não encontrada"));
 
-        System.out.print("Enviando PIX de " + userSending.getUserId() + " para " + userReceive.getUserPixKey());
-
         double amount = pixPaymentModels.getAmount();
 
         String TransactionId = UUID.randomUUID().toString();
 
         TransactionModels transaction = createDTOTransaction.createTransactionDTO(userSending, userReceive, pixPaymentModels, TransactionId);
 
-        System.out.print("Transação criada: " + transaction);
-
         Date data = new Date();
 
         try {
             saveTransactionDBService.saveTransaction(transaction);
-
-            System.out.print("Transação salva no DB: " + transaction);
 
             userSending.setUserValueBalance(userSending.getUserValueBalance() - amount);
             userSending.setUserLastTransactionAmount(pixPaymentModels.getAmount());
@@ -64,7 +58,6 @@ public class SendPixService {
 
             accountUserRepository.save(userSending);
             accountUserRepository.save(userReceive);
-            System.out.print("Atualizacao dos valores dos envios pix no DB");
         } catch (Exception e) {
             throw new RuntimeException("Erro ao processar transação PIX. Mudanças revertidas.", e);
         }

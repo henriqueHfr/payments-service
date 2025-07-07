@@ -27,7 +27,6 @@ public class PixPaymentListerners {
 
     @KafkaListener(topics = "pix-payment-topic", groupId = "pagamento-group", containerFactory = "kafkaListenerContainerFactory")
     public ResponseEntity<String> consumer(PixPaymentModels pixPaymentModels) {
-        System.out.println("Recebido pagamento confirmado para usuário: " + pixPaymentModels);
 
         boolean existsAccount = validateAccountsService.validateAccount(pixPaymentModels);
         if (!existsAccount) {
@@ -39,8 +38,6 @@ public class PixPaymentListerners {
         if (!validateBalance) {
             return ResponseEntity.badRequest().body("Saldo insuficiente na conta de envio.");
         }
-
-        System.out.print("Processando pagamento PIX para: " + pixPaymentModels.getPixKey());
 
         sendPixService.sendPix(pixPaymentModels);
         return ResponseEntity.ok("Pagamento PIX processado com sucesso.");

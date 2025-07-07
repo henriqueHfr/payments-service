@@ -20,7 +20,6 @@ public class PixPaymentController {
 
     @PostMapping("/send")
     public ResponseEntity<String> SendPaymentPix(@Validated @RequestBody PixPaymentModels pixPaymentModels) {
-        System.out.println("Recebendo pagamento PIX: " + pixPaymentModels.getPixKey());
         if (pixPaymentModels.getPixKey() == null || pixPaymentModels.getPixKey().isEmpty()) {
             return ResponseEntity.badRequest().body("Pix key is required");
         }

@@ -15,7 +15,6 @@ public class CreateUserEvents {
 
     public void sendCreateUserEvent(AccountUserModel accountUserModel) {
         try {
-            System.out.println("Enviando evento de criação de usuário: " + accountUserModel);
             kafkaTemplate.send("create-user-topic", accountUserModel);
         } catch (Exception e) {
             e.printStackTrace();

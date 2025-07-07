@@ -14,13 +14,9 @@ public class ValidateBalanceBetweenAcccountService {
 
     public Boolean validateBalance(Long userSendingId, Double amount) {
 
-        System.out.print("Validando saldo da conta de envio: " + userSendingId + " com valor: " + amount);
-
         Double balanceSending = accountUserRepository.findById(userSendingId)
                 .orElseThrow(() -> new RuntimeException("Conta de envio não encontrada"))
                 .getUserValueBalance();
-
-        System.out.print("Saldo encontrado: " + balanceSending);
 
         return balanceSending < amount ? false : true;
     }

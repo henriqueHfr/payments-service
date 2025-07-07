@@ -19,7 +19,6 @@ public class PixPaymentEvents {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(pixPaymentModels);
-            System.out.println("Enviando pagamento PIX em JSON: " + json);
             kafkaTemplate.send("pix-payment-topic", pixPaymentModels);
         } catch (Exception e) {
             e.printStackTrace();

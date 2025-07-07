@@ -20,7 +20,6 @@ public class CreateUserListerners {
      public void onUserCreated(AccountUserModel accountUserModel) {
          try {
              accountUserRepository.save(accountUserModel);
-             System.out.println("User created: " + accountUserModel);
          } catch (DataIntegrityViolationException ex) {
              throw new CreateUserException("Erro ao persistir usuário: dados inválidos.", ex);
          } catch (Exception ex) {
